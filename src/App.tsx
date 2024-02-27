@@ -17,7 +17,7 @@ function App() {
 		setTimeout(() => {
 			// This function will execute after a short delay
 			// Handle the case when the app is not installed
-			console.log("App not installed");
+			alert("App not installed");
 		}, 1000); // Adjust the timeout as needed
 	};
 	return (
