@@ -49,7 +49,7 @@ function App() {
 					py: 2,
 				}}
 			>
-				<Typography variant="h2">ONDC</Typography>
+				<img src={"./ondc_logo.png"}/>
 				<Typography variant="h4">
 					<i>Apna</i> <b>QR</b>
 				</Typography>
