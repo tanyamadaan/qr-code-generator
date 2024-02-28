@@ -2,51 +2,128 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
+import { Layout } from "./Layout";
+import FormControl from "@mui/material/FormControl";
+import InputLabel from "@mui/material/InputLabel";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import { useState } from "react";
+import { USECASES } from "./assets/constants";
+import Fade from "@mui/material/Fade";
+import Box from "@mui/material/Box";
+import { Controlled as CodeMirror } from "react-codemirror2";
+
+import "codemirror/lib/codemirror.css";
+import "codemirror/theme/material.css";
+import "codemirror/mode/javascript/javascript.js";
+import { QrDialog } from "./components";
 
 function App() {
-	const checkAppInstallation = () => {
-		const customUrlScheme = "beckn://ondc";
-
-		// Attempt to open the custom URL scheme
-		const iframe = document.createElement("iframe");
-		iframe.style.display = "none";
-		iframe.src = customUrlScheme;
-		document.body.appendChild(iframe);
-
-		// Set a timer to check if the app was opened
-		setTimeout(() => {
-			// This function will execute after a short delay
-			// Handle the case when the app is not installed
-			alert("App not installed");
-		}, 1000); // Adjust the timeout as needed
+	const [selectedUseCaseIndex, setselectedUseCaseIndex] = useState("");
+	const [showCodemirror, setShowCodemirror] = useState(false);
+	const [qrData, setQrData] = useState("");
+	const [showQrDialog, setShowQrDialog] = useState(false);
+	const handleUsecaseChange = (event: SelectChangeEvent) => {
+		setselectedUseCaseIndex(event.target.value.toString());
+		setShowCodemirror(true);
+		setQrData(
+			JSON.stringify(USECASES[+selectedUseCaseIndex].initialValue, null, 2)
+		);
+	};
+	const handleOnBeforeChange = (
+		editor: unknown,
+		data: unknown,
+		value: string
+	) => {
+		setQrData(value);
 	};
 	return (
-		<Container
-			sx={{
-				minHeight: "100vh",
-				display: "flex",
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-		>
-			<Paper
+		<Layout>
+			<Container
 				sx={{
-					p: 2,
-					maxWidth: 300,
+					minHeight: "100vh",
 					display: "flex",
-					justifyContent: "center",
+					// justifyContent: "center",
 					alignItems: "center",
 					flexDirection: "column",
+					pt: 5,
 				}}
 			>
-				<Typography align="center" mb={2}>
-					Click the Button to check if app is installed
+				<Typography variant="h2">ONDC</Typography>
+				<Typography variant="h4">
+					<i>Apna</i> <b>QR</b>
 				</Typography>
-				<Button variant="contained" onClick={checkAppInstallation}>
-					Check
-				</Button>
-			</Paper>
-		</Container>
+				<Paper
+					sx={{
+						p: 2,
+						maxWidth: 350,
+						width: "100%",
+						display: "flex",
+						justifyContent: "center",
+						alignItems: "center",
+						flexDirection: "column",
+					}}
+				>
+					<Typography color="text.secondary">Select your Usecase:</Typography>
+					<FormControl fullWidth>
+						<InputLabel id="usecase-select-label">Usecase</InputLabel>
+						<Select
+							labelId="usecase-select-label"
+							id="usecase-select"
+							value={selectedUseCaseIndex}
+							label="Usecase"
+							onChange={handleUsecaseChange}
+						>
+							{USECASES.map((usecase, idx) => (
+								<MenuItem value={idx} key={"usecase-" + idx}>
+									{usecase.name}
+								</MenuItem>
+							))}
+						</Select>
+					</FormControl>
+					<Fade in={showCodemirror} timeout={1000} unmountOnExit>
+						<Box
+							sx={{
+								mt: 2,
+							}}
+						>
+							<Typography variant="h6" color="text.secondary">
+								Edit the Code:
+							</Typography>
+							<CodeMirror
+								value={qrData}
+								// autoCursor={false}
+								options={{
+									// readOnly: "nocursor",
+									theme: "material",
+									height: "auto",
+									viewportMargin: Infinity,
+									mode: {
+										name: "javascript",
+										json: true,
+										statementIndent: 2,
+									},
+									lineNumbers: true,
+									lineWrapping: true,
+									indentWithTabs: false,
+									tabSize: 2,
+								}}
+								onBeforeChange={handleOnBeforeChange}
+							/>
+							<Button
+								variant="contained"
+								fullWidth
+								sx={{ mt: 2 }}
+								onClick={() => setShowQrDialog(true)}
+							>
+								Generate QR
+							</Button>
+						</Box>
+					</Fade>
+				</Paper>
+				<QrDialog onClose={() => setShowQrDialog(false)} open={showQrDialog} qrData={qrData}/>
+			</Container>
+		</Layout>
 	);
 }
 
