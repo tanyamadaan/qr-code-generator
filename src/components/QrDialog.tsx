@@ -1,7 +1,10 @@
-import { DialogContent, DialogTitle, } from "@mui/material";
+
 import Dialog from "@mui/material/Dialog";
 import { transformJSON } from "../utils";
-import QRCode from "react-qr-code";
+import { QRCode } from 'react-qrcode-logo';
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import useTheme from "@mui/material/styles/useTheme";
 
 type QrDialog = {
 	onClose: () => void;
@@ -10,6 +13,7 @@ type QrDialog = {
 };
 
 export const QrDialog = ({ onClose, open, qrData }: QrDialog) => {
+  const theme = useTheme()
 	const link = transformJSON(qrData);
   console.log("LINK", link)
 	return (
@@ -17,10 +21,17 @@ export const QrDialog = ({ onClose, open, qrData }: QrDialog) => {
 			<DialogTitle>Your QR</DialogTitle>
 			<DialogContent>
 				<QRCode
-					size={256}
-					style={{ height: "auto", maxWidth: "100%", width: "100%" }}
+					size={250}
+					// style={{ height: "auto", maxWidth: "100%", width: "100%" }}
 					value={link as string}
-					viewBox={`0 0 256 256`}
+          logoImage="./ondc_logo.png"
+          logoHeight={80}
+          logoWidth={80}
+          // fgColor={theme.palette.primary.light}
+          eyeColor={theme.palette.primary.dark}
+          removeQrCodeBehindLogo
+          logoPaddingStyle="circle"
+          logoPadding={5}
 				/>
 			</DialogContent>
 		</Dialog>
