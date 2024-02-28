@@ -46,7 +46,7 @@ function App() {
 					// justifyContent: "center",
 					alignItems: "center",
 					flexDirection: "column",
-					pt: 5,
+					py: 2,
 				}}
 			>
 				<Typography variant="h2">ONDC</Typography>
