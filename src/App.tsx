@@ -31,8 +31,8 @@ function App() {
 		);
 	};
 	const handleOnBeforeChange = (
-		editor: unknown,
-		data: unknown,
+		_editor: unknown,
+		_data: unknown,
 		value: string
 	) => {
 		setQrData(value);
