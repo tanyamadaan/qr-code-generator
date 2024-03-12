@@ -25,17 +25,17 @@ function App() {
 	const [qrData, setQrData] = useState("");
 	const [showQrDialog, setShowQrDialog] = useState(false);
 
-	const handleThemeChange = () => {
-    setTheme(prev => prev ==="light" ? "dark": "light");
-  };
+// 	const handleThemeChange = () => {
+//     setTheme(prev => prev ==="light" ? "dark": "light");
+//   };
 
 	const handleUsecaseChange = (event: SelectChangeEvent) => {
-		setselectedUseCaseIndex(event.target.value.toString());
+		const selectedIndex = event.target.value.toString();
+		setselectedUseCaseIndex(selectedIndex);
 		setShowCodemirror(true);
-		setQrData(
-			JSON.stringify(USECASES[+selectedUseCaseIndex].initialValue, null, 2)
-		);
+		setQrData(JSON.stringify(USECASES[+selectedIndex].initialValue, null, 2));
 	};
+	
 	const handleOnBeforeChange = (
 		_editor: unknown,
 		_data: unknown,
@@ -57,7 +57,7 @@ function App() {
 			>
 				<img src={"./ondc_logo.png"} />
 				<Typography variant="h4">
-					<i>Apna</i> <b>QR</b>
+					<i>QR Code Generator</i>
 				</Typography>
 				<Paper
 					sx={{
@@ -73,7 +73,7 @@ function App() {
 					<Box
 						sx={{ width: "100%", display: "flex", justifyContent: "flex-end" }}
 					>
-						<ThemeSwitch checked={theme === "dark"} onChange={handleThemeChange}/>
+						{/* <ThemeSwitch checked={theme === "dark"} onChange={handleThemeChange}/> */}
 					</Box>
 					<Typography color="text.secondary">Select your Usecase:</Typography>
 					<FormControl fullWidth>
@@ -99,7 +99,7 @@ function App() {
 							}}
 						>
 							<Typography variant="h6" color="text.secondary">
-								Edit the Code:
+								Edit the values below:
 							</Typography>
 							<CodeMirror
 								value={qrData}
