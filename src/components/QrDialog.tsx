@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Dialog from "@mui/material/Dialog";
 import { transformJSON } from "../utils";
 import { QRCode } from 'react-qrcode-logo';
