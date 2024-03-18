@@ -18,6 +18,7 @@ export const QrDialog = ({ onClose, open, qrData }: QrDialog) => {
         logoHeight: 0,
         logoWidth: 0,
     });
+	console.log("HERE")
 
     useEffect(() => {
         // Load the logo image
@@ -26,7 +27,7 @@ export const QrDialog = ({ onClose, open, qrData }: QrDialog) => {
 
         logo.onload = () => {
             // Define base width for the logo
-            const basewidth = 400;
+            const basewidth = 300;
             // Calculate new dimensions for the logo
             const wpercent = basewidth / logo.width;
 			console.log(logo.width)

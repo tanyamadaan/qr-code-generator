@@ -4,8 +4,7 @@ export const USECASES = [
     initialValue: {
       context: {
         bpp_id: "sellerapp.com",
-        domain: "ONDC:RET10",
-        action: "search"
+        domain: "ONDC:RET10"
       },
       message: {
         intent: {
@@ -19,6 +18,12 @@ export const USECASES = [
           }
         }
       }
+    },
+    placeholders: {
+      "context.bpp_id": "subscriber_id",
+      "context.domain": "ONDC Domain",
+      "message.intent.provider.id": "Provider id (Get this from Seller App)",
+      "message.intent.provider.locations.0.id": "Provider's Location id (Get this from Seller App)"
     }
   },
   {
@@ -44,6 +49,13 @@ export const USECASES = [
           }
         }
       }
+    },
+    placeholders: {
+      "context.bpp_id": "subscriber_id",
+      "context.domain": "ONDC Domain",
+      "message.intent.category.id": "category",
+      "message.intent.provider.id": "Provider id (Get this from Seller App)",
+      "message.intent.provider.locations.0.id": "Provider's Location id"
     }
   },
   {
@@ -117,5 +129,5 @@ export const USECASES = [
       }
     }
   }
-  
+
 ]
