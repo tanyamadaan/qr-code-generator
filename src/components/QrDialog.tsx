@@ -22,24 +22,19 @@ export const QrDialog = ({ onClose, open, qrData }: QrDialog) => {
 	useEffect(() => {
 		// Load the logo image
 		const logo = new Image();
-		logo.src = "./logo.png";
+		logo.src = "./ondc-network-vertical.png";
 
 		logo.onload = () => {
 			// Define base width for the logo
-			const basewidth = 300;
+			const basewidth = 100;
 			// Calculate new dimensions for the logo
 			const wpercent = basewidth / logo.width;
-			console.log(logo.width);
 			const hsize = logo.height * wpercent;
-
-			console.log(logo.height);
 			// Create a canvas element to resize the logo
 			const canvas = document.createElement("canvas");
 			canvas.width = basewidth;
 			canvas.height = hsize;
-			console.log(hsize);
 			const ctx = canvas.getContext("2d");
-			console.log(ctx);
 
 			// Use Lanczos interpolation to resize the logo
 			if (ctx) {
@@ -79,7 +74,7 @@ export const QrDialog = ({ onClose, open, qrData }: QrDialog) => {
 			</DialogTitle>
 			<DialogContent sx={{ display: "flex", justifyContent: "center"}}>
 				<QRCode
-					size={350}
+					size={450}
 					ecLevel="H"
 					quietZone={4}
 					value={link as string}

@@ -6,7 +6,7 @@ export function transformJSON(
 	additionalValues: JsonObject = {"context.action": "search"}
 ): string | null {
 	try {
-		console.log(inputJSON)
+		// console.log(inputJSON)
 		// Parse the input JSON string
 		const inputObj: JsonObject = JSON.parse(inputJSON);
 
@@ -15,16 +15,14 @@ export function transformJSON(
 			...mergedObj,
 			...additionalValues,
 		};
-		console.log(mergedObj)
 
 		// Convert the merged object to a query string
 		const queryString = Object.entries(qrObj)
-			.map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+			.map(([key, value]) => `${key}=${value}`)
 			.join("&");
 
 		// Construct the final beckn URL
 		const becknURL = `beckn://ondc?${queryString}`;
-		console.log(becknURL)
 		return becknURL;
 	} catch (error) {
 		console.error("Error parsing JSON:", (error as Error).message);
@@ -64,7 +62,6 @@ export function finaldata(inputObj: JsonObject, additionalValues: JsonObject = {
 		...flattenedMessage,
 		...additionalValues,
 	};
-	console.log(mergedObj)
 	}
 	
 	return mergedObj

@@ -1,10 +1,10 @@
 export const USECASES = [
 	{
-		name: "Catalog Specific QR Code",
+		name: "Store QR Code",
 		placeholders: [
 			{
 				name: "context.bpp_id",
-				placeholder: "subscriber_id",
+				placeholder: "seller app url",
 				type: "text",
 			},
 			{
@@ -12,24 +12,24 @@ export const USECASES = [
 				type: "select",
 				placeholder: "ONDC Domain",
 				options: [
-					"ONDC:RET1A",
-					"ONDC:RET1B",
-					"ONDC:RET1C",
-					"ONDC:RET1D",
-					"ONDC:RET10",
-					"ONDC:RET12",
-					"ONDC:RET13",
-					"ONDC:RET14",
+					"ONDC:RET10=Grocery",
+					"ONDC:RET11=F&B",
+					"ONDC:RET12=Fashion",
+					"ONDC:RET13=BPC",
+					"ONDC:RET14=Electronics",
+					"ONDC:RET15=Appliances",
+					"ONDC:RET16=Home & Decor",
+					"ONDC:RET17=Toys & Games",
 				],
 			},
 			{
 				name: "message.intent.provider.id",
-				placeholder: "Provider id (Get this from Seller App)",
+				placeholder: "Seller id (Get this from Seller App)",
 				type: "text",
 			},
 			{
 				name: "message.intent.provider.locations.0.id",
-				placeholder: "Provider's Location id (Get this from Seller App)",
+				placeholder: "Seller's Location id (Get this from Seller App)",
 				type: "text",
 			},
 		],
