@@ -11,6 +11,11 @@ import { TextField, Button } from "@mui/material";
 import { QrDialog } from "./components";
 import { USECASES } from "./assets/constants";
 
+enum Domain {
+  Grocery = "ONDC:RET10",
+  BPC = "ONDC:RET11",
+}
+
 function App() {
 	const [theme] = useState<"light" | "dark">("light");
 	const [showQrDialog, setShowQrDialog] = useState(false);

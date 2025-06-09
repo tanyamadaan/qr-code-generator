@@ -43,6 +43,15 @@ function flattenObject(obj: JsonObject, parentKey = ""): JsonObject {
 	}, {});
 }
 
+// const updateQrData = (selectedIndex: string) => {
+//     const schema = JSON.stringify(USECASES[+selectedIndex].initialValue, null, 2)
+//     setqrkey(JSON.stringify(USECASES[+selectedIndex].placeholders, null, 2));
+//     const mergedObj = finaldata(JSON.parse(schema))
+//     console.log(qrkey)
+//     setQrData(JSON.stringify(mergedObj));
+//     console.log(qrkey)
+//   };
+
 export function finaldata(inputObj: JsonObject, additionalValues: JsonObject = {}): JsonObject {
 	let mergedObj: JsonObject = {};
 
